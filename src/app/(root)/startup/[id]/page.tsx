@@ -1,6 +1,5 @@
 import { formatDate } from '@/lib/utils';
 import { client } from '@/sanity/lib/client';
-import { STARTUP_BY_ID_QUERY } from '@/sanity/lib/queries';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -8,6 +7,14 @@ import React, { Suspense } from 'react'
 import markdownit from 'markdown-it'
 import { Skeleton } from '@/components/ui/skeleton';
 import View from '@/components/View';
+import {
+  PLAYLIST_BY_SLUG_QUERY,
+  STARTUP_BY_ID_QUERY,
+} from "@/sanity/lib/queries";
+import StartupCard,{StartupTypeCard} from '@/components/StartupCard';
+
+
+
 export const experimental_ppr = true;
 
 const md = markdownit();
@@ -34,10 +41,10 @@ const Page = async ({params}:{params:Promise<{id:string}>}) => {
         <div className='space-y-5 mt-10 max-w-4xl mx-auto'>
           <div className='flex-between gap-5'>
             <Link href={`/user/${post.author?._id}`} className='flex gap-2 items-center mb-3'>
-              <Image src={post.author.image} alt='avatar' width={64} height={64} className='rounded-full shadow-[0_6px_12px_rgba(0,0,0,0.2)] ring-2 ring-black sscale-105 transition-transform duration-300 ease-in-out '/>
+              <Image src={post.author?.image} alt='avatar' width={64} height={64} className='rounded-full shadow-[0_6px_12px_rgba(0,0,0,0.2)] ring-2 ring-black sscale-105 transition-transform duration-300 ease-in-out '/>
               <div>
-                <p className='text-20-medium'>{post.author.name}</p>
-                <p className='text-16-medium !text-black-300'>@{post.author.username}</p>
+                <p className='text-20-medium'>{post.author?.name}</p>
+                <p className='text-16-medium !text-black-300'>@{post.author?.username}</p>
 
               </div>
             </Link>
